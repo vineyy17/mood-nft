@@ -1,30 +1,95 @@
-# MoodNft
+# MoodNft Project
 
-MoodNft is a dynamic, on-chain NFT smart contract built with Solidity. It allows owners to mint NFTs with two possible moods: Happy or Sad. The NFT's mood can be flipped by the owner, and the NFT's metadata, including attributes, reflects the current mood.
+MoodNft is a dynamic NFT project that reflects the owner's mood. Each NFT can be in either a happy or sad state, with the ability to flip between these moods.
 
 ## Features
 
-- **ERC-721 compliant**: Follows the ERC-721 standard for NFTs.
-- **Dynamic metadata**: NFT mood can change between "Happy" and "Sad," and this is reflected in the token metadata.
-- **On-chain SVG images**: NFT metadata is stored fully on-chain, including mood-dependent SVG image URIs.
+- Mint NFTs with an initial happy mood
+- Flip the mood of owned NFTs
+- Dynamic metadata that changes based on the NFT's current mood
+- Fully on-chain SVG images
 
-## Contract Overview
+## Technologies
 
-- `mintNft()`: Mint a new NFT with the default "Happy" mood.
-- `flipMood(uint256 tokenId)`: Flip the mood of an NFT between "Happy" and "Sad." Only the owner of the NFT can perform this action.
-- `tokenURI(uint256 tokenId)`: Returns the on-chain JSON metadata, including the image and mood-based attributes.
+- Solidity 0.8.20
+- Foundry/Forge for development and testing
+- OpenZeppelin for ERC721 implementation
 
-## Mood-Based Metadata
+## Setup
 
-- **Happy Mood**:
-  - Image: Displays a happy SVG image.
-  - Attribute: `"cheerfulness": 100`
-  
-- **Sad Mood**:
-  - Image: Displays a sad SVG image.
-  - Attribute: `"moodiness": 100`
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   make install
+   ```
 
-## Prerequisites
+## Building
 
-- [Solidity ^0.8.0](https://docs.soliditylang.org/en/latest/)
-- [OpenZeppelin Contracts](https://docs.openzeppelin.com/contracts/4.x/)
+To build the project, run:
+
+```bash
+make build
+```
+
+## Testing
+
+Run tests with:
+
+```bash
+make test
+```
+
+For zkSync specific tests:
+
+```bash
+make zktest
+```
+
+## Deployment
+
+To deploy the contract:
+
+```bash
+make deploy
+```
+
+For network-specific deployment (e.g., Sepolia), use:
+
+```bash
+make deploy ARGS="--network sepolia"
+```
+
+## Interacting with the Contract
+
+- To mint a new NFT:
+  ```bash
+  make mint
+  ```
+
+- To flip the mood of an NFT:
+  ```bash
+  make flip
+  ```
+
+## Development Commands
+
+- Format code: `make format`
+- Update dependencies: `make update`
+- Run local Anvil chain: `make anvil`
+
+## Environment Setup
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+SEPOLIA_RPC_URL=your_sepolia_rpc_url
+ETHERSCAN_API_KEY=your_etherscan_api_key
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
