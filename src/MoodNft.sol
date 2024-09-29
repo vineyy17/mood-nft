@@ -1,29 +1,9 @@
-// Layout of Contract:
-// version
-// imports
-// errors
-// interfaces, libraries, contracts
-// Type declarations
-// State variables
-// Events
-// Modifiers
-// Functions
-
-// Layout of Functions:
-// constructor
-// receive function (if exists)
-// fallback function (if exists)
-// external
-// public
-// internal
-// private
-// view & pure functions
-
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.20;
 
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 contract MoodNft is ERC721 {
     // errors
@@ -77,11 +57,17 @@ contract MoodNft is ERC721 {
         uint256 tokenId
     ) public view override returns (string memory) {
         string memory imageURI;
+        string memory trait;
+        uint256 traitValue;
 
         if (s_tokenIdToMood[tokenId] == Mood.HAPPY) {
             imageURI = s_happySvgImageUri;
+            trait = "cheerfulness";
+            traitValue = 100;
         } else {
             imageURI = s_sadSvgImageUri;
+            trait = "moodiness";
+            traitValue = 100;
         }
 
         return
@@ -94,7 +80,11 @@ contract MoodNft is ERC721 {
                                 '{"name":"',
                                 name(),
                                 '", "description":"An NFT that reflects the mood of the owner, 100% on Chain!", ',
-                                '"attributes": [{"trait_type": "moodiness", "value": 100}], "image":"',
+                                '"attributes": [{"trait_type": "',
+                                trait,
+                                '", "value": "',
+                                Strings.toString(traitValue),
+                                '"}], "image":"',
                                 imageURI,
                                 '"}'
                             )
