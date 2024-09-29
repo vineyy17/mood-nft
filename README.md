@@ -1,66 +1,30 @@
-## Foundry
+# MoodNft
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+MoodNft is a dynamic, on-chain NFT smart contract built with Solidity. It allows owners to mint NFTs with two possible moods: Happy or Sad. The NFT's mood can be flipped by the owner, and the NFT's metadata, including attributes, reflects the current mood.
 
-Foundry consists of:
+## Features
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **ERC-721 compliant**: Follows the ERC-721 standard for NFTs.
+- **Dynamic metadata**: NFT mood can change between "Happy" and "Sad," and this is reflected in the token metadata.
+- **On-chain SVG images**: NFT metadata is stored fully on-chain, including mood-dependent SVG image URIs.
 
-## Documentation
+## Contract Overview
 
-https://book.getfoundry.sh/
+- `mintNft()`: Mint a new NFT with the default "Happy" mood.
+- `flipMood(uint256 tokenId)`: Flip the mood of an NFT between "Happy" and "Sad." Only the owner of the NFT can perform this action.
+- `tokenURI(uint256 tokenId)`: Returns the on-chain JSON metadata, including the image and mood-based attributes.
 
-## Usage
+## Mood-Based Metadata
 
-### Build
+- **Happy Mood**:
+  - Image: Displays a happy SVG image.
+  - Attribute: `"cheerfulness": 100`
+  
+- **Sad Mood**:
+  - Image: Displays a sad SVG image.
+  - Attribute: `"moodiness": 100`
 
-```shell
-$ forge build
-```
+## Prerequisites
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- [Solidity ^0.8.0](https://docs.soliditylang.org/en/latest/)
+- [OpenZeppelin Contracts](https://docs.openzeppelin.com/contracts/4.x/)
